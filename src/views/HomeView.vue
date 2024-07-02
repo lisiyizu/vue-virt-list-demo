@@ -1,17 +1,31 @@
 <template>
   <div class="home">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <list ref="list" msg="Welcome to Your Vue.js App"/>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/list.vue'
+import list from '@/components/list.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld
+    list
+  },
+  data() {
+    return {
+      offset: 0
+    }
+  },
+  beforeRouteLeave(to, from, next) {
+    this.offset = this.$refs.list.$refs.virtListRef.getOffset();
+    next()
+  },
+  activated() {
+     if(this.offset > 0) {
+      this.$refs.list.$refs.virtListRef.scrollToOffset(this.offset);
+     }
   }
 }
 </script>

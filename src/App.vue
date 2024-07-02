@@ -6,7 +6,7 @@
     </nav>
      <keep-alive :include="['HomeView']">
       <router-view/>
-     </keep-alive>./components/list.vue
+     </keep-alive>
   </div>
 </template>
 
